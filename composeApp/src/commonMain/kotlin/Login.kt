@@ -11,16 +11,23 @@ import androidx.compose.material.Text
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 
-class Login: Screen {
+class Login : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        Button(onClick={
-            navigator.push(Home())
-        }){
-            Text("to Home")
+        Column {
+            Button(onClick = {
+                navigator.push(Home())
+            }) {
+                Text("to Home")
+            }
+            Button(onClick = {
+                navigator.push(HomeTab())
+            }) {
+                Text("to HomeTAB")
+            }
+            ListComposable(myList = listOf("Item 1", "Item 2", "Item 3"))
         }
-        ListComposable(myList = listOf("Item 1", "Item 2", "Item 3"))
     }
 
 }
@@ -28,7 +35,7 @@ class Login: Screen {
 
 @Composable
 fun ListComposable(myList: List<String>) {
-    Row(modifier = Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.SpaceAround) {
+    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
         Column {
             for (item in myList) {
                 Text("Item: $item")
